@@ -37,8 +37,7 @@ jobs:
       run: |
         git config --global user.name "crawler-bot"
         git config --global user.email "crawler-bot@gmail.com"
-        git add Output/  # 將 Output 資料夾中的檔案加入 Git
-        git commit -m "daily crawl"  # 提交變更
+        git add . && git commit -m "daily crawl"
         git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/WCLynn/Open-Platform-Software-mid-project.git main  # 使用 GITHUB_TOKEN 進行身份驗證
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
