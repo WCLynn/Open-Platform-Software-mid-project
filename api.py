@@ -5,7 +5,7 @@ import os
 
 
 API_KEY = os.getenv('YOUTUBE_API')
-
+print(API_KEY)
 # API請求參數
 url = "https://www.googleapis.com/youtube/v3/videos"
 params = {
