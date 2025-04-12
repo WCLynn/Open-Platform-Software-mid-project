@@ -1,9 +1,9 @@
-name: Web Scraping Workflow
+name: Open-Platform-Software mid project
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '25 21 * * *'
+    - cron: '50 21 * * *'
 
 jobs:
   scrape:
