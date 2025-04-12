@@ -1,0 +1,43 @@
+name: Web Scraping Workflow
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run static.py scraper
+      run: |
+        python static.py
+
+    - name: Run api.py scraper
+      run: |
+        python api.py
+
+    - name: Save output files to artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: scraping-output
+        path: |
+          *.csv
+          *.json
+
+    - name: Clean up
+      run: |
+        rm -rf output_directory
