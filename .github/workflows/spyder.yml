@@ -34,13 +34,12 @@ jobs:
         python api.py  # 執行 api.py 爬蟲程式
 
     - name: Save output files to artifact
-      uses: actions/upload-artifact@v3  # 將輸出的檔案上傳為 artifacts
-      # with:
-      #   name: scraping-output
-      #   path: |
-      #     output_directory/  # 輸出目錄（如果你在爬蟲中設置了輸出目錄，這裡放置相對路徑）
-      #     *.csv  # 例如，如果爬蟲會輸出 CSV 檔案，你可以指定此路徑
-      #     *.json  # 你也可以設置其他格式檔案的路徑
+      uses: actions/upload-artifact@v2.3.1  # 將輸出的檔案上傳為 artifacts
+      with:
+        name: scraping-output
+        path: |
+          *.csv  # 例如，如果爬蟲會輸出 CSV 檔案，你可以指定此路徑
+          *.json  # 你也可以設置其他格式檔案的路徑
           
     - name: Clean up
       run: |
