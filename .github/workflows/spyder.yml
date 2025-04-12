@@ -1,0 +1,47 @@
+name: Web Scraping Workflow
+
+on:
+  # 手動執行工作流
+  workflow_dispatch:
+
+  # 定時執行工作流，每週執行一次
+  schedule:
+    - cron: '0 0 * * *'  # 每天午夜 00:00 執行
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest  # 設置工作運行環境為 Ubuntu
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # 檢出你的 GitHub 儲存庫代碼
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'  # 使用 Python 3.8
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt  # 安裝所需的 Python 庫，如 BeautifulSoup、requests 等
+
+    - name: Run static.py scraper
+      run: |
+        python static.py  # 執行 static.py 爬蟲程式
+
+    - name: Run api.py scraper
+      run: |
+        python api.py  # 執行 api.py 爬蟲程式
+
+    - name: Save output files to artifact
+      uses: actions/upload-artifact@v2  # 將輸出的檔案上傳為 artifacts
+      # with:
+      #   name: scraping-output
+      #   path: |
+      #     output_directory/  # 輸出目錄（如果你在爬蟲中設置了輸出目錄，這裡放置相對路徑）
+      #     *.csv  # 例如，如果爬蟲會輸出 CSV 檔案，你可以指定此路徑
+      #     *.json  # 你也可以設置其他格式檔案的路徑
+          
+    - name: Clean up
+      run: |
+        rm -rf output_directory  # 清理生成的輸出目錄
