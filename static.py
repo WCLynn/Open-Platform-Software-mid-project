@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import csv
 import re
 
-web = requests.get("https://www.ettoday.net/news/hot-news.htm")
+web = requests.get("https://www.ettoday.net/news/hot-news.htm") # 請求熱門新聞網頁
 soup = BeautifulSoup(web.text, "html.parser")
 Div_Temp = soup.findAll('div', "piece clearfix")
 max = 10
@@ -15,9 +15,9 @@ cnt = 0
 for link in Div_Temp:
     cnt += 1
     a_tag = link.find('a', class_='pic')
-    title = link.find('h3')
+    title = link.find('h3') # 擷取新聞標題
     if link:
-        href = a_tag['href']
+        href = a_tag['href'] # 擷取新聞網址
         if re.match(r"^//", href):
             continue
         links.append(href)
@@ -29,7 +29,7 @@ for link in Div_Temp:
 for t, l in zip(titles, links):
     web_content = requests.get(l)
     soup_content = BeautifulSoup(web_content.text, "html.parser")
-    meta_tag = soup_content.find('meta', {'name': 'news_keywords'})    
+    meta_tag = soup_content.find('meta', {'name': 'news_keywords'})   # 擷取新聞news_keywords
     if meta_tag:
         content = meta_tag['content']
         Keywords.append(content)

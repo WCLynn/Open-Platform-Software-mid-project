@@ -4,7 +4,7 @@ import csv
 import os
 
 
-API_KEY = os.getenv('YOUTUBE_API')
+API_KEY = os.getenv('YOUTUBE_API') # 連接Youtube API
 
 # API請求參數
 url = "https://www.googleapis.com/youtube/v3/videos"
@@ -16,7 +16,7 @@ params = {
     "key": API_KEY
 }
 
-def parse_duration(duration):
+def parse_duration(duration): # 將時長轉換為時分秒
     match = re.match(r'PT(\d+H)?(\d+M)?(\d+S)?', duration)
     hours = int(match.group(1)[:-1]) if match.group(1) else 0
     minutes = int(match.group(2)[:-1]) if match.group(2) else 0
@@ -31,20 +31,20 @@ Data = []
 # 處理回應
 if response.status_code == 200:
     data = response.json()
-    for item in data['items']:
+    for item in data['items']: # 取得API提供的資料
         title = item['snippet']['title']
         views = item['statistics']['viewCount']
         likes = item['statistics']['likeCount']
         duration = item['contentDetails']['duration']
         hours, minutes, seconds = parse_duration(duration)
         Length = f'{hours}:{minutes}:{seconds}'
-        hashtags = re.findall(r"(?<=#)\S+", title)
+        hashtags = re.findall(r"(?<=#)\S+", title) # 擷取標題的#Hashatg
         if len(hashtags) == 0:
             hashtags = "No hashtag"
         else:
             title = re.sub(r"\s*#\S+\s*", "", title)
 
-        Data.append([title,Length,views,likes,hashtags])
+        Data.append([title,Length,views,likes,hashtags]) #將資料記錄下來(標題、時長、觀看數、喜歡數、Hashtag)
 else:
     print("錯誤: 無法獲取資料，請檢查 API 金鑰或請求設定")
     
