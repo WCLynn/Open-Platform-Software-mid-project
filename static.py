@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import re
+import os
 
 web = requests.get("https://www.ettoday.net/news/hot-news.htm")
 soup = BeautifulSoup(web.text, "html.parser")
@@ -38,10 +39,10 @@ for t, l in zip(titles, links):
 data = zip(titles, Keywords)        
 
 # write CSV
-filename = "static.csv"
-with open(filename, mode='w', encoding='utf-8-sig', newline='') as file:
+output_directory = 'Output'
+os.makedirs(output_directory, exist_ok=True)  # 確保資料夾存在
+
+with open(os.path.join(output_directory, 'static.csv'), 'w', newline='', encoding='utf-8-sig') as file:
     writer = csv.writer(file)
     writer.writerow(["Title", "Keyword"])  # 寫入欄位名稱
     writer.writerows(data)  # 寫入每一筆資料
-
-# print(f"CSV檔案已儲存為 {filename}")
