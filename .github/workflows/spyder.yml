@@ -3,7 +3,7 @@ name: Web Scraping Workflow
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 5 * * *'  # 每天 05:00 執行
 
 jobs:
   scrape:
