@@ -3,7 +3,7 @@ name: Open-Platform-Software mid project
 on:
   workflow_dispatch:
   schedule:
-    - cron: '50 21 * * *'
+    - cron: '0 22 * * *' # 台灣時間早上6點執行
 
 jobs:
   scrape:
