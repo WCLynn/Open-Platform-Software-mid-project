@@ -34,7 +34,7 @@ jobs:
         python api.py  # 執行 api.py 爬蟲程式
 
     - name: Save output files to artifact
-      uses: actions/upload-artifact@v2.3.1  # 將輸出的檔案上傳為 artifacts
+      uses: actions/upload-artifact@v3  # 將輸出的檔案上傳為 artifacts
       with:
         name: scraping-output
         path: |
