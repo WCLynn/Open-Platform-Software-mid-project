@@ -44,5 +44,5 @@ with open(filename, mode='w', encoding='utf-8-sig', newline='') as file:
     writer.writerow(["Title", "Keyword"])  # 寫入欄位名稱
     writer.writerows(data)  # 寫入每一筆資料
 
-# print(f"CSV檔案已儲存為 {filename}")
+print(f"CSV檔案已儲存為 {filename}")
 

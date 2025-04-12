@@ -55,3 +55,4 @@ with open(filename, mode='w', encoding='utf-8-sig', newline='') as file:
     writer.writerow(["Title", "Length", "View", "Like", "Hashtag"])  # 寫入欄位名稱
     writer.writerows(Data)  # 寫入每一筆資料
 
+print(f"CSV檔案已儲存為 {filename}")
