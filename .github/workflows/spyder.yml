@@ -18,6 +18,9 @@ jobs:
       with:
         python-version: '3.8'
 
+    - name: Set up environment variable for API_KEY
+      run: echo "YOUTUBE_API=${{ secrets.YOUTUBE_API }}" >> $GITHUB_ENV  # 將 Secret 設為環境變數
+
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
