@@ -49,10 +49,9 @@ else:
     print("錯誤: 無法獲取資料，請檢查 API 金鑰或請求設定")
     
 # write CSV
-output_directory = 'Output'
-os.makedirs(output_directory, exist_ok=True)  # 確保資料夾存在
-
-with open(os.path.join(output_directory, 'api.csv'), 'w', newline='', encoding='utf-8-sig') as file:
+filename = "api.csv"
+with open(filename, mode='w', encoding='utf-8-sig', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(["Title", "Length", "View", "Like", "Hashtag"])  # 寫入欄位名稱
     writer.writerows(Data)  # 寫入每一筆資料
+
