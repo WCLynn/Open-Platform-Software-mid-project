@@ -4,8 +4,8 @@ import csv
 import os
 
 
-API_KEY = os.getenv('Youtube_API')
-print(API_KEY)
+API_KEY = os.getenv('YOUTUBE_API')
+
 # API請求參數
 url = "https://www.googleapis.com/youtube/v3/videos"
 params = {
